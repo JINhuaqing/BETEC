@@ -62,7 +62,7 @@ p1 <- 0.25
 # 4 hyper-parameters
 pi1 <- 0.8
 pi2 <- 0.90
-a1 <- 0.10
+a1 <- 0.05
 a2 <- 0.25
 
 N <- 200000
@@ -97,8 +97,8 @@ for (n in (n1+1):200){
             print("Find addmissible solution")
             bflag <- 1
             break()
-        }else if (prob.2s >= a2){
-            break()
+#         }else if (prob.2s >= a2){
+#             break()
         }else{
             print(paste("Current (r, n) is", r, n, ".", "Need to continue"))
         }
@@ -111,5 +111,13 @@ for (n in (n1+1):200){
 res <- data.frame(stage1=res.s1, stage2=res.s2)
 rownames(res) <- c("r", "n")
 res
+
+params <- list(
+    pi1=pi1, pi2=pi2, a1=a1, a2=a2, p0=p0, p1=p1, N=N
+)
+
+output.res <- list(result=res, params=params)
+save.name <- paste0("ResultBoth", pi1*100, "_", pi2*100, "_", a1*100, "_",  a2*100, "_", p0*100, "_", p1*100, ".RData")
+save(output.res, file=save.name)
 
 

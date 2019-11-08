@@ -3,8 +3,7 @@ library(magrittr)
 
 
 # compute the probability of early termination w.r.t p
-PET <- function(r1, n1, p){
-  return(pbinom(r1, n1, p))
+PET <- function(r1, n1, p){ return(pbinom(r1, n1, p))
 }
 
 # compute the reject probability w.r.t p
@@ -55,8 +54,8 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.05
-p1 <- 0.25
+p0 <- 0.3
+p1 <- 0.5
 
 # 4 hyper-parameters
 pi1 <- 0.8
@@ -64,7 +63,7 @@ pi2 <- 0.9
 a1 <- 0.05
 a2 <- 0.45
 
-N <- 20000
+N <- 200000
 
 for (n1 in 1:100){
     probs.l <- post.prob(alpha0, beta0, 1:n1, n1, p0)
@@ -109,4 +108,11 @@ res <- data.frame(stage1=res.s1, stage2=res.s2)
 rownames(res) <- c("r", "n")
 res
 
+params <- list(
+    pi1=pi1, pi2=pi2, a1=a1, a2=a2, p0=p0, p1=p1, N=N
+)
+
+output.res <- list(result=res, params=params)
+save.name <- paste0("Result", pi1*100, "_", pi2*100, "_", a1*100, "_",  a2*100, "_", p0*100, "_", p1*100, ".RData")
+save(output.res, file=save.name)
 
