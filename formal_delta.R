@@ -3,8 +3,8 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.3
-p1 <- 0.5
+p0 <- 0.05
+p1 <- 0.25
 dlt <- 0.2
 
 # 4 hyper-parameters
@@ -22,9 +22,6 @@ pprob <- function(alpha0, beta0, r, n, p1){
 for (n1 in 1:100){
     probs.l <- pprob(alpha0, beta0, 1:n1, n1, p0)
     probs.s <- pprob(alpha0, beta0, 0:(n1-1), n1, p1)
-    #plot(1:n1, probs.l, type = "b", col="red", ylim = c(0, 1), pch=17)
-    #lines(1:n1, probs.s, type = "b", col="green")
-    #abline(h=c(0.10, 0.8))
     idxs <- (probs.l>pi1) + (probs.s<a1) 
     r1range <- 1:n1
     r1range <- r1range[idxs==2];
@@ -41,8 +38,6 @@ r1 <- res.s1[1]
 for (n in (n1+1):200){
     probs.2l <- pprob(alpha0, beta0, r1:(n-n1+r1), n, p1)
     probs.2s <- pprob(alpha0, beta0, (r1-1):(n-n1+r1-1), n, p1+dlt)
-#    plot(0:n, probs.2l, type="b", col="red", ylim=c(0, 1))
-#    lines(0:n, probs.2s, type="b", col="green", ylim=c(0, 1), pch=17)
     idxs.2 <- (probs.2l>pi2) + (probs.2s<a2)
     rrange <- r1:(n-n1+r1)
     rrange <- rrange[idxs.2==2]

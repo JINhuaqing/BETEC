@@ -56,16 +56,16 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.05
-p1 <- 0.25
+p0 <- 0.1
+p1 <- 0.3
 
 # 4 hyper-parameters
 pi1 <- 0.8
 pi2 <- 0.90
-a1 <- 0.05
+a1 <- 0.07
 a2 <- 0.25
 
-N <- 200000
+N <- 20000
 
 for (n1 in 1:100){
     probs.l <- post.prob(alpha0, beta0, 1:n1, n1, p0)
