@@ -125,8 +125,8 @@ for (nowa1 in a1s){
     for (nowa2 in a2s){
         print(c(flag, nowa1, nowa2))
         nowres <- myfun(a1=nowa1, a2=nowa2, p0=p0, p1=p1, pi1=pi1, pi2=pi2, alpha0=alpha0, beta0=beta0)
-        all.res[flag] <- nowres
-        corparas[flag] <- c(nowa1, nowa2)
+        all.res[[flag]] <- nowres
+        corparas[[flag]] <- c(nowa1, nowa2)
         flag <- flag+1
     }
 }
