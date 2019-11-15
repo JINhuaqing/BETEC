@@ -1,5 +1,6 @@
 rm(list=ls())
 library(magrittr)
+library(parallel)
 
 
 # compute the probability of early termination w.r.t p
@@ -90,6 +91,7 @@ myfun <- function(p0, p1, pi1, pi2, a1, a2, alpha0, beta0){
     #             break()
             }else{
                 x <- 1
+                res.s2 <- c(0, 0)
                 #print(paste("Current (r, n) is", r, n, ".", "Need to continue"))
             }
         }
@@ -118,23 +120,29 @@ a2 <- 0.25
 
 a1s <- c(0.03, 0.04, 0.06, 0.08, 0.09, 0.10)
 a2s <- seq(0.20, 0.30, 0.01)
-flag <- 1
-all.res <- list()
-corparas <- list()
-for (nowa1 in a1s){
-    for (nowa2 in a2s){
-        print(c(flag, nowa1, nowa2))
+
+runfn <- function(i){
+    nowa2 <- a2s[i]
+    flag <- 1
+    all.res <- list()
+    corparas <- list()
+    for (nowa1 in a1s){
+        print(c(i, flag, nowa1, nowa2))
         nowres <- myfun(a1=nowa1, a2=nowa2, p0=p0, p1=p1, pi1=pi1, pi2=pi2, alpha0=alpha0, beta0=beta0)
         all.res[[flag]] <- nowres
         corparas[[flag]] <- c(nowa1, nowa2)
         flag <- flag+1
     }
+    return(list(all.res, corparas))
 }
+
 params <- list(
-    pi1=pi1, pi2=pi2, p0=p0, p1=p1, N=N
+    pi1=pi1, pi2=pi2, p0=p0, p1=p1
 )
 
-output.res <- list(result=all.res, corparas=corparas, params=params)
+results <- mclapply(1:length(a2s), runfn, mc.cores=5)
+output.res <- list(results=results, params=params)
+
 save.name <- paste0("ResultBoth", p0*100, "_", p1*100, ".RData")
 save(output.res, file=save.name)
 
