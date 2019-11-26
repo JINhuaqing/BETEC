@@ -7,7 +7,7 @@ source("utilities.R")
 
 
 myfun <- function(p0, p1, pi1, pi2, a1, a2, alpha0, beta0){
-    N <- 20000
+    N <- 200000
     res.s1 <- bBET.stage1.R1(p0, p1, pi1, a1, alpha0, beta0, nMax=100, N=N)
     n1 <- res.s1[2]
     r1 <- res.s1[1]
@@ -22,17 +22,15 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.05
-p1 <- 0.25
+p0 <- 0.3
+p1 <- 0.5
 
 # 4 hyper-parameters
 pi1 <- 0.8
 pi2 <- 0.90
-a1 <- 0.07
-a2 <- 0.25
 
-a1s <- c(0.03, 0.04, 0.06, 0.08, 0.09, 0.10)
-a2s <- seq(0.20, 0.30, 0.01)
+a1s <- c(0.05, 0.1)
+a2s <- c(0.20, 0.25, 0.30)
 
 runfn <- function(i){
     nowa2 <- a2s[i]
@@ -53,7 +51,7 @@ params <- list(
     pi1=pi1, pi2=pi2, p0=p0, p1=p1
 )
 
-results <- mclapply(1:length(a2s), runfn, mc.cores=5)
+results <- mclapply(1:length(a2s), runfn, mc.cores=3)
 output.res <- list(results=results, params=params)
 
 save.name <- paste0("bBET_all", p0*100, "_", p1*100, ".RData")
