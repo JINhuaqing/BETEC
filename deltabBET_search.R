@@ -16,8 +16,8 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.3
-p1 <- 0.5
+p0 <- 0.05
+p1 <- 0.25
 
 # 4 hyper-parameters
 pi1 <- 0.8
@@ -45,7 +45,7 @@ params <- list(
 )
 
 output.res <- list(result=all.res, corparas=corparas, params=params)
-save.name <- paste0("ResultDelta", p0*100, "_", p1*100, ".RData")
+save.name <- paste0("deltabBET_all", p0*100, "_", p1*100, ".RData")
 save(output.res, file=save.name)
 
 
