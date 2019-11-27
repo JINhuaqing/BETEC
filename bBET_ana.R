@@ -1,5 +1,7 @@
+rm(list=ls())
 setwd("/Users/jinhuaqing/Downloads/inbox/BEText/")
 setwd("C:/Users/Dell/Downloads/inbox/BEText")
+source("utilities.R")
 library(magrittr)
 library(dplyr)
 
@@ -11,7 +13,8 @@ for (i in 1:length(fs)){
     ress[[i]] <- output.res
 }
 
-res2df <- function(res){
+list2df <- function(res){
+    res <- res$results
     df1 <- lapply(res, function(x){do.call(rbind, x[[1]])}) %>% do.call(rbind, args=.)
     df2 <- lapply(res, function(x){do.call(rbind, x[[2]])}) %>% do.call(rbind, args=.)
     df.all <- cbind(df1, df2) %>% as.data.frame()
@@ -19,8 +22,46 @@ res2df <- function(res){
     df.all
 }
 
-df4 <- res2df(ress[[4]]$results);df4[c(1, 2, 4), ] 
-df1 <- res2df(ress[[1]]$results);df1[c(1, 2, 4), ]
-df2 <- res2df(ress[[2]]$results);df2[c(1, 2, 4), ]
-df3 <- res2df(ress[[3]]$results);df3[c(1, 2, 4), ]
+# compute the PoP of H_0, H_1 
+comb.res <- function(res, alpha0, beta0, N=10000){
+    PoPR1s <- c()
+    PoPr1s <- c()
+    PoPRs <- c()
+    PoPrs <- c()
+    tb <- list2df(res)
+    tb1 <- tb[, 1:4] %>% as.matrix()
+    p1 <- res$params$p1
+    p0 <- res$params$p0
+    num <- dim(tb1)[1]
+    for (i in 1:num){
+        re <- tb1[i, ] 
+        r1 <- re[1]
+        r <- re[3]
+        n1 <- re[2]
+        n <- re[4]
+        PoPR1s <- c(PoPR1s, int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N))
+        PoPr1s <- c(PoPr1s, 1-post.prob(alpha0, beta0, r1, n1, p0))
+        PoPRs <- c(PoPRs, int.post.density(p1, 1, r1, r, n1, n, alpha0, beta0, N))
+        PoPrs <- c(PoPrs, post.prob(alpha0, beta0, r, n, p1))
+    }
+    res.df <- cbind(PoPR1s, PoPr1s, PoPRs, PoPrs) %>% as.data.frame() %>% round(3)
+    names(res.df) <- c("H1_R1", "H0_r1n1", "H1_R", "H1_rn")
+    res.df <- cbind(tb, res.df)
+    res.df[, c(5, 6, 1:4, 7:10)]
+}
+
+
+df4 <- list2df(ress[[4]]);df4[c(1, 2, 4), ] 
+df1 <- list2df(ress[[1]]);df1[c(1, 2, 4), ]
+df2 <- list2df(ress[[2]]);df2[c(1, 2, 4), ]
+df3 <- list2df(ress[[3]]);df3[c(1, 2, 4), ]
+
+alpha0 <- 1
+beta0 <- 1
+N <- 50000
+comb.res(ress[[4]], alpha0, beta0, N)[c(1, 2, 4), ]
+comb.res(ress[[1]], alpha0, beta0, N)[c(1, 2, 4), ]
+comb.res(ress[[2]], alpha0, beta0, N)[c(1, 2, 4), ]
+comb.res(ress[[3]], alpha0, beta0, N)[c(1, 2, 4), ]
+
 

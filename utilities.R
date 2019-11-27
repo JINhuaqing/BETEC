@@ -18,7 +18,7 @@ rej.prob <- function(r1, r, n1, n, p){
   return(itm1+itm2)
 }
 
-# compute the probability of p0 > p when observing (r, n)
+# compute the probability of response rate > p when observing (r, n)
 post.prob <- function(alpha0, beta0, r, n, p){
     prob <- 1 - pbeta(p, alpha0+r, beta0+n-r)
     return(prob)
@@ -139,3 +139,5 @@ bBET.stage2 <- function(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200, N=1000
     }
     res.s2
 }
+
+
