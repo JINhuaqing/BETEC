@@ -1,6 +1,5 @@
 rm(list=ls())
-setwd("/Users/jinhuaqing/Downloads/inbox/BEText/")
-setwd("C:/Users/Dell/Downloads/inbox/BEText")
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
 source("utilities.R")
 library(magrittr)
 library(dplyr)
