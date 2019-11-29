@@ -6,9 +6,9 @@ post.f <- function(r, n){
 
 # bBET
 f1 <- post.f(26, 84)
-f2 <- post.f(25, 67)
-f3 <- post.f(20, 40)
-f4 <- post.f(16, 25)
+f2 <- post.f(27, 73)
+f3 <- post.f(24, 49)
+f4 <- post.f(17, 27)
 jpeg(file="bBET.jpg")
 curve(f1, 0, 1, lty=1, lwd=2, xlab="p", ylab="Density", xaxt="n")
 curve(f2, 0, 1, lty=2, lwd=2, add=TRUE)
