@@ -54,6 +54,10 @@ df4 <- list2df(ress[[4]]);df4[c(1, 2, 4), ]
 df1 <- list2df(ress[[1]]);df1[c(1, 2, 4), ]
 df2 <- list2df(ress[[2]]);df2[c(1, 2, 4), ]
 df3 <- list2df(ress[[3]]);df3[c(1, 2, 4), ]
+df4 <- list2df(ress[[4]]);df4
+df1 <- list2df(ress[[1]]);df1
+df2 <- list2df(ress[[2]]);df2
+df3 <- list2df(ress[[3]]);df3
 
 alpha0 <- 1
 beta0 <- 1

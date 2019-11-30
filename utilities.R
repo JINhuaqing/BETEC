@@ -10,6 +10,12 @@ PET <- function(r1, n1, p){
   }
 }
 
+# expected sample size
+ESS <- function(r1, n1, n, p){
+    pet <- PET(r1, n1, p)
+    n1 + (1-pet) * (n - n1)
+}
+
 # compute the reject probability w.r.t p, for the whole design
 rej.prob <- function(r1, r, n1, n, p){
   xs <- (r1):(min(n1, r-1))
@@ -70,9 +76,12 @@ deltabBET.stage2 <- function(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200){
     dlt <- p1 - p0
     for (n in (n1+1):nMax){
         probs.2l <- post.prob(alpha0, beta0, r1:(n-n1+r1), n, p1)
+        #probs.2l <- post.prob(alpha0, beta0, r1:n, n, p1)
         probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-n1+r1-1), n, p1+dlt)
+        #probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-1), n, p1+dlt)
         idxs.2 <- (probs.2l>pi2) + (probs.2s<a2)
         rrange <- r1:(n-n1+r1)
+        #rrange <- r1:n
         rrange <- rrange[idxs.2==2]
         if (length(rrange) >= 1){
            res.s2 <- c(rrange[1], n) 
