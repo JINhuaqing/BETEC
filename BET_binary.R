@@ -1,35 +1,14 @@
-
-#####################################Code for BET design with binary endpoint#######################################
-
-
-p0=0.2               ######### The uninteresting response rate in the null hypothesis
-p1=0.4               ######### The desirable target response rate in the alternative hypothesis
-l1=0.4               ######### Required HPD interval length for stage 1
-l2=0.2               ######### Required HPD interval length for stage 2
-Pi1=0.8            ######### Posterior probability cutoff for stage 1
-Pi2=0.9            ######### Posterior probability cutoff for stage 2
-a=1                  ######### Parameter a for Beta prior distribution
-b=1                  ######### Parameter b for Beta prior distribution
-minn=1               ######### Minimum sample size for the first stage; 
-                     ######### for noninformative prior, typically set as 1; for informative prior typically set as 10 to 15
-
-					 
-					 
-stage1nr=findparam(Pi1,a,b,p0,l1,200,minn)
-stage2nr=findparam(Pi2,a,b,p1,l2,200,minn)
-
-		
-
-
-#####################################Load the following functions into R###############################################
-
+rm(list=ls())
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+library(magrittr)
+source("utilities.R")
 library(TeachingDemos)
  
  
 betabn<-function(x,n,a,b){choose(n,x)*beta(a+x,b+n-x)/beta(a,b)}
 
 hpdresult<-function(x,n,a,b,Pi){
-h=hpd(qbeta, shape1=a+x, shape2=b+n-x,Pi=Pi)
+h=hpd(qbeta, shape1=a+x, shape2=b+n-x,conf=Pi)
 return(h[2]-h[1])
 }
 
@@ -116,3 +95,33 @@ r=findr(y2root,Pi,a,b,ps)
 	
 }
 
+
+
+p0=0.2               ######### The uninteresting response rate in the null hypothesis
+p1=0.5               ######### The desirable target response rate in the alternative hypothesis
+l1=0.55               ######### Required HPD interval length for sta
+l2=0.31              ######### Required HPD interval length for stage 2
+Pi1=0.91          ######### Posterior probability cutoff for stage 1
+Pi2=0.91          ######### Posterior probability cutoff for stage 2
+alpha0 = 1
+beta0 = 1
+minn=1               ######### Minimum sample size for the first stage; 
+                     ######### for noninformative prior, typically set as 1; for informative prior typically set as 10 to 15
+
+					 
+					 
+stage1nr=findparam(Pi1,alpha0,beta0,p0,l1,200,minn)
+stage2nr=findparam(Pi2,alpha0,beta0,p1,l2,200,minn)
+stage1nr
+stage2nr
+
+r1 <- stage1nr$r
+n1 <- stage1nr$n
+r <- stage2nr$r
+n <- stage2nr$n
+N <- 50000
+PoPR1s <- int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N)
+PoPr1s <- 1-post.prob(alpha0, beta0, r1, n1, p0)
+PoPRs <- int.post.density(p1, 1, r1, r, n1, n, alpha0, beta0, N)
+PoPrs <- post.prob(alpha0, beta0, r, n, p1)
+c(PoPR1s, PoPr1s, PoPRs, PoPrs) %>% round(3)
