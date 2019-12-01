@@ -1,4 +1,5 @@
 rm(list=ls())
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
 library(magrittr)
 source("utilities.R")
 
@@ -8,13 +9,13 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.1
-p1 <- 0.3
+p0 <- 0.2
+p1 <- 0.5
 
 # 4 hyper-parameters
-pi1 <- 0.8
-pi2 <- 0.90
-a1 <- 0.05
+pi1 <- 0.91
+pi2 <- 0.91
+a1 <- 0.09
 a2 <- 0.22
 N <- 50000
 
