@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+#setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
 library(magrittr)
 source("utilities.R")
 
@@ -16,8 +16,8 @@ p1 <- 0.5
 pi1 <- 0.91
 pi2 <- 0.91
 a1 <- 0.09
-a2 <- 0.22
-N <- 50000
+a2 <- 0.2
+N <- 200000
 
 
 res.s1 <- bBET.stage1.R1(p0, p1, pi1, a1, alpha0, beta0, nMax=100, N=N)
