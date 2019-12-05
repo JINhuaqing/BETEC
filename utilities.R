@@ -75,13 +75,13 @@ deltabBET.stage2 <- function(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200){
     res.s2 <- c()
     dlt <- p1 - p0
     for (n in (n1+1):nMax){
-        probs.2l <- post.prob(alpha0, beta0, r1:(n-n1+r1), n, p1)
-        #probs.2l <- post.prob(alpha0, beta0, r1:n, n, p1)
-        probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-n1+r1-1), n, p1+dlt)
-        #probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-1), n, p1+dlt)
+        #probs.2l <- post.prob(alpha0, beta0, r1:(n-n1+r1), n, p1)
+        probs.2l <- post.prob(alpha0, beta0, r1:n, n, p1)
+        #probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-n1+r1-1), n, p1+dlt)
+        probs.2s <- post.prob(alpha0, beta0, (r1-1):(n-1), n, p1+dlt)
         idxs.2 <- (probs.2l>pi2) + (probs.2s<a2)
-        rrange <- r1:(n-n1+r1)
-        #rrange <- r1:n
+        #rrange <- r1:(n-n1+r1)
+        rrange <- r1:n
         rrange <- rrange[idxs.2==2]
         if (length(rrange) >= 1){
            res.s2 <- c(rrange[1], n) 
@@ -127,7 +127,8 @@ bBET.stage2 <- function(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200, N=1000
     res.s2 <- c()
     bflag <- 0
     for (n in (n1+1):nMax){
-        for (r in r1:(n-n1+r1)){
+        for (r in r1:n){
+        #for (r in r1:(n-n1+r1)){
             prob.2l <- post.prob(alpha0, beta0, r, n, p1)
             prob.2s <- int.post.density(p1, 1, r1, r, n1, n, alpha0, beta0, N=N)
             print(c(prob.2l, prob.2s))

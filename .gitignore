@@ -3,3 +3,5 @@
 demo*
 *.tex
 *.7z
+*.zip
+SIM_template/*

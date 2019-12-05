@@ -16,8 +16,8 @@ alpha0 <- 1
 beta0 <- 1
 
 # Test probabilities
-p0 <- 0.05
-p1 <- 0.25
+p0 <- 0.30
+p1 <- 0.50
 
 # 4 hyper-parameters
 pi1 <- 0.8
