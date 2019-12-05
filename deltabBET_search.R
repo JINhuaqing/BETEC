@@ -14,7 +14,7 @@ myfun <- function(p0, p1, a1, a2, pi1, pi2, alpha0, beta0, nMin=1){
 
 alpha0 <- 4
 beta0 <- 6
-nMin <- 8
+nMin <- 1
 
 # Test probabilities
 p0 <- 0.3

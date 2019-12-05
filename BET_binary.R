@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/bBET")
 library(magrittr)
 source("utilities.R")
 library(TeachingDemos)
@@ -98,11 +98,11 @@ r=findr(y2root,Pi,a,b,ps)
 
 
 p0=0.2               ######### The uninteresting response rate in the null hypothesis
-p1=0.5               ######### The desirable target response rate in the alternative hypothesis
-l1=0.55               ######### Required HPD interval length for sta
-l2=0.31              ######### Required HPD interval length for stage 2
-Pi1=0.91          ######### Posterior probability cutoff for stage 1
-Pi2=0.91          ######### Posterior probability cutoff for stage 2
+p1=0.35               ######### The desirable target response rate in the alternative hypothesis
+l1=0.25               ######### Required HPD interval length for sta
+l2=0.21              ######### Required HPD interval length for stage 2
+Pi1=0.9          ######### Posterior probability cutoff for stage 1
+Pi2=0.9          ######### Posterior probability cutoff for stage 2
 alpha0 = 1
 beta0 = 1
 minn=1               ######### Minimum sample size for the first stage; 
@@ -119,6 +119,10 @@ r1 <- stage1nr$r
 n1 <- stage1nr$n
 r <- stage2nr$r
 n <- stage2nr$n
+#r1 <- 7
+#n1 <- 33
+#r <- 16
+#n <- 58
 N <- 50000
 PoPR1s <- int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N)
 PoPr1s <- 1-post.prob(alpha0, beta0, r1, n1, p0)

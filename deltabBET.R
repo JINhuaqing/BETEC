@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/bBET")
 library(magrittr)
 source("utilities.R")
 alpha0 <- 1
@@ -7,13 +7,13 @@ beta0 <- 1
 
 # Test probabilities
 p0 <- 0.2
-p1 <- 0.5
+p1 <- 0.35
 
 # 4 hyper-parameters
-pi1 <- 0.91
-pi2 <- 0.91
+pi1 <- 0.9
+pi2 <- 0.9
 a1 <- 0.15
-a2 <- 0.01
+a2 <- 0.1
 
 res.s1 <- bBET.stage1(p0, p1, pi1, a1, alpha0, beta0, nMax=100)
 n1 <- res.s1[2]

@@ -10,13 +10,13 @@ beta0 <- 1
 
 # Test probabilities
 p0 <- 0.2
-p1 <- 0.5
+p1 <- 0.35
 
 # 4 hyper-parameters
-pi1 <- 0.91
-pi2 <- 0.91
-a1 <- 0.09
-a2 <- 0.2
+pi1 <- 0.9
+pi2 <- 0.9
+a1 <- 0.03
+a2 <- 0.19
 N <- 200000
 
 
