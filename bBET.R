@@ -5,11 +5,13 @@ source("utilities.R")
 
 
 
-alpha0 <- 1
-beta0 <- 1
+alpha0 <- 2
+beta0 <- 3
+nMin <- 15
 
 # Test probabilities
 p0 <- 0.2
+<<<<<<< HEAD
 p1 <- 0.35
 
 # 4 hyper-parameters
@@ -18,9 +20,19 @@ pi2 <- 0.9
 a1 <- 0.03
 a2 <- 0.19
 N <- 200000
+=======
+p1 <- 0.4
+
+# 4 hyper-parameters
+pi1 <- 0.8
+pi2 <- 0.9
+a1 <- 0.10
+a2 <- 0.20
+N <- 10000
+>>>>>>> 6e755e19422c6aa185c1ae97ab42217c2c705e95
 
 
-res.s1 <- bBET.stage1.R1(p0, p1, pi1, a1, alpha0, beta0, nMax=100, N=N)
+res.s1 <- bBET.stage1.R1(p0, p1, pi1, a1, alpha0, beta0, nMin=nMin, nMax=100, N=N)
 n1 <- res.s1[2]
 r1 <- res.s1[1]
 res.s2 <- bBET.stage2(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200, N=N)
