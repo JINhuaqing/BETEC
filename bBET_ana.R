@@ -1,11 +1,11 @@
 rm(list=ls())
-setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+#setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
 source("utilities.R")
 library(magrittr)
 library(dplyr)
 
 # Load the data for delta method
-fs <- list.files(pattern="bBET.*.RData")
+fs <- list.files(pattern="infobBET.*.RData")
 ress <- list()
 for (i in 1:length(fs)){
     load(fs[i])
@@ -50,6 +50,8 @@ comb.res <- function(res, alpha0, beta0, N=10000){
 }
 
 
+df1 <- list2df(ress[[1]]);df1
+fsafda
 df4 <- list2df(ress[[4]]);df4[c(1, 2, 4), ] 
 df1 <- list2df(ress[[1]]);df1[c(1, 2, 4), ]
 df2 <- list2df(ress[[2]]);df2[c(1, 2, 4), ]
