@@ -50,9 +50,9 @@ int.post.density.stage1 <- function(lb, ub, r1, n1, alpha0, beta0, N=10000){
 }
 
 # compute the parameters of stage 1 of bBET for Pr(p<p1|r1-1, n1)
-bBET.stage1 <- function(p0, p1, pi1, a1, alpha0, beta0, nMax=100){
+bBET.stage1 <- function(p0, p1, pi1, a1, alpha0, beta0, nMin=1, nMax=100){
     res.s1 <- c()
-    for (n1 in 1:nMax){
+    for (n1 in nMin:nMax){
         probs.l <- post.prob(alpha0, beta0, 1:n1, n1, p0)
         probs.s <- post.prob(alpha0, beta0, 0:(n1-1), n1, p1)
         idxs <- (probs.l>pi1) + (probs.s<a1) 
@@ -96,10 +96,10 @@ deltabBET.stage2 <- function(r1, n1, p0, p1, pi2, a2, alpha0, beta0, nMax=200){
 
 
 # compute the parameters of stage 1 of bBET for Pr(|R1)
-bBET.stage1.R1 <- function(p0, p1, pi1, a1, alpha0, beta0, nMax=100, N=10000){
+bBET.stage1.R1 <- function(p0, p1, pi1, a1, alpha0, beta0, nMin=1, nMax=100, N=10000){
     res.s1 <- c()
     bflag <- 0
-    for (n1 in 1:nMax){
+    for (n1 in nMin:nMax){
         for (r1 in 1:n1){
             prob.l <- post.prob(alpha0, beta0, r1, n1, p0)
             prob.s <- int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N=N)

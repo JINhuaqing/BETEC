@@ -5,7 +5,7 @@ library(magrittr)
 library(dplyr)
 
 # Load the data for delta method
-fs <- list.files(pattern="deltabBET.*.RData")
+fs <- list.files(pattern="infodeltabBET.*.RData")
 ress <- list()
 for (i in 1:length(fs)){
     load(fs[i])
