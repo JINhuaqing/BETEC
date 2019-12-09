@@ -11,16 +11,6 @@ nMin <- 15
 
 # Test probabilities
 p0 <- 0.2
-<<<<<<< HEAD
-p1 <- 0.35
-
-# 4 hyper-parameters
-pi1 <- 0.9
-pi2 <- 0.9
-a1 <- 0.03
-a2 <- 0.19
-N <- 200000
-=======
 p1 <- 0.4
 
 # 4 hyper-parameters
@@ -29,7 +19,6 @@ pi2 <- 0.9
 a1 <- 0.10
 a2 <- 0.20
 N <- 10000
->>>>>>> 6e755e19422c6aa185c1ae97ab42217c2c705e95
 
 
 res.s1 <- bBET.stage1.R1(p0, p1, pi1, a1, alpha0, beta0, nMin=nMin, nMax=100, N=N)
