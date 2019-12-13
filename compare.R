@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/BET_ext")
+setwd("C:/Users/Dell/Google Drive/multi-computers_folder/projects/bBET")
 source("utilities.R")
 library(magrittr)
 library(dplyr)
@@ -30,7 +30,7 @@ bBET.df <- data.frame(
 dbBET.df <- data.frame(
     r1=c(1, 1, 4, 7),
     n1=c(8, 6, 14, 18),
-    r =c(14, 16, 22, 13),
+    r =c(14, 16, 22, 23),
     n =c(41, 41, 44, 38)
 )
 
