@@ -16,7 +16,7 @@ ESS <- function(r1, n1, n, p){
     n1 + (1-pet) * (n - n1)
 }
 
-# compute the reject probability w.r.t p, for the whole design
+# compute the probability of rejecting drug (accept H0) w.r.t p, for the whole design
 rej.prob <- function(r1, r, n1, n, p){
   xs <- (r1):(min(n1, r-1))
   itm1 <- pbinom(r1-1, n1, p)
@@ -61,6 +61,37 @@ int.post.density.stage1 <- function(lb, ub, r1, n1, alpha0, beta0, N=10000){
     idxkeep <- (ps <= ub) & (ps >= lb) 
     probs.truc <- probs * idxkeep
     mean(probs.truc)/mean(probs)
+}
+
+# Compute the Bayesian and frequentist statistics give (r1, n1, r, n)
+Combo.Results <- function(paras, p0, p1, alpha0=1, beta0=1, N=10000){
+    # paras: The design parameters of two-stage trials, (r1, n1, r, n)
+    # p0: The uninteresting response rate
+    # p1: The target response rate
+    # (alpha0, beta0): The prior parameters of Beta distribution
+    # N: The number of samples used in MCMC integration
+
+    r1 <- paras[1]
+    n1 <- paras[2]
+    r <- paras[3]
+    n <- paras[4]
+
+    typeI.err <- 1-rej.prob(r1, r, n1, n, p0)
+    typeII.err <- rej.prob(r1, r, n1, n, p1)
+    ess0 <- ESS(r1, n1, n, p0)
+    ess1 <- ESS(r1, n1, n, p1)
+    pet0 <- PET(r1, n1, p0)
+    pet1 <- PET(r1, n1, p1)
+    PoP.H0r1 <- 1 - post.prob(alpha0, beta0, r1, n1, p0)
+    PoP.H1r <- post.prob(alpha0, beta0, r, n, p1)
+    PoP.H1R1 <- int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N)
+    PoP.H1R <- int.post.density(p1, 1, r1, r, n1, n, alpha0, beta0, N)
+
+    res <- c(typeI.err, typeII.err, ess0, ess1, pet0, pet1, PoP.H0r1, PoP.H1r, 
+             PoP.H1R1, PoP.H1R)
+    names(res) <- c("type1err", "type2err", "ESS0", "ESS1", 
+                    "PET0", "PET1", "PoPH0r1", "PoPH1r", "PoPH1R1", "PoPH1R")
+    res
 }
 
 # Search the design parameters of stage 1 of deltaBETEC 
