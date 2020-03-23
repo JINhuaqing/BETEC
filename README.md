@@ -23,3 +23,12 @@ The functions defined in utilities.R file of formalcode folder
  res.BETEC <- BETEC(p0, p1, pi1, pi2, a1, a2, alpha0=1, beta0=1, nMax=200, N=10000)
  res.deltaBETEC <- deltaBETEC(p0, p1, pi1, pi2, b1, b2)
 ```
+
+
+This repository also includes 
+
+- the CPP code for simon's design (Simon, 1989) with early stopping for efficacy. 
+
+- The R code for BET design (Shi and Yin, 2018).
+
+- The R code for STD and DTD design (Tan and Machin, 2002).
