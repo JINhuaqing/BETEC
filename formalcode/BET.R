@@ -99,10 +99,10 @@ findparam<-function(Pi,a,b,ps,target,maxn=200,minn=10){
 
 p0=0.2               ######### The uninteresting response rate in the null hypothesis
 p1=0.35               ######### The desirable target response rate in the alternative hypothesis
-l1=0.25               ######### Required HPD interval length for sta
-l2=0.21              ######### Required HPD interval length for stage 2
-Pi1=0.9          ######### Posterior probability cutoff for stage 1
-Pi2=0.9          ######### Posterior probability cutoff for stage 2
+l1=0.1               ######### Required HPD interval length for sta
+l2=0.1              ######### Required HPD interval length for stage 2
+Pi1=0.5          ######### Posterior probability cutoff for stage 1
+Pi2=0.6         ######### Posterior probability cutoff for stage 2
 alpha0 = 1
 beta0 = 1
 minn=1               ######### Minimum sample size for the first stage; 
