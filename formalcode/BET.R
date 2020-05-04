@@ -1,6 +1,7 @@
 rm(list=ls())
 library(magrittr)
 library(TeachingDemos)
+source("utilities.R")
  
  
 betabn<-function(x,n,a,b){
@@ -95,14 +96,24 @@ findparam<-function(Pi,a,b,ps,target,maxn=200,minn=10){
     	
 }
 
+# (p0, p1) = (0.05, 0.25), (l1, l2) = (0.07, 0.1)
+# (p0, p1) = (0.1, 0.3), (l1, l2) = (0.09, 0.105)
+# (p0, p1) = (0.2, 0.4), (l1, l2) = (0.11, 0.11)
+# (p0, p1) = (0.3, 0.5), (l1, l2) = (0.13, 0.11)
+# (p0, p1) = (0.4, 0.6), (l1, l2) = (0.13, 0.11)
+# (p0, p1) = (0.5, 0.7), (l1, l2) = (0.13, 0.10)
+# (p0, p1) = (0.6, 0.8), (l1, l2) = (0.13, 0.085)
 
-
-p0=0.2               ######### The uninteresting response rate in the null hypothesis
-p1=0.35               ######### The desirable target response rate in the alternative hypothesis
-l1=0.1               ######### Required HPD interval length for sta
-l2=0.1              ######### Required HPD interval length for stage 2
+# The uninteresting response rate in the null hypothesis
+p0=0.6
+# The desirable target response rate in the alternative hypothesis
+p1=0.8               
+# Required HPD interval length for stage 1
+l1=0.13
+# Required HPD interval length for stage 2
+l2=0.085
 Pi1=0.5          ######### Posterior probability cutoff for stage 1
-Pi2=0.6         ######### Posterior probability cutoff for stage 2
+Pi2=0.55         ######### Posterior probability cutoff for stage 2
 alpha0 = 1
 beta0 = 1
 minn=1               ######### Minimum sample size for the first stage; 
@@ -112,10 +123,13 @@ minn=1               ######### Minimum sample size for the first stage;
 					 
 stage1nr=findparam(Pi1,alpha0,beta0,p0,l1,200,minn)
 stage2nr=findparam(Pi2,alpha0,beta0,p1,l2,200,minn)
-stage1nr
-stage2nr
 
 r1 <- stage1nr$r
 n1 <- stage1nr$n
 r <- stage2nr$r
 n <- stage2nr$n
+res <- c(r1, n1, r, n)
+names(res) <- c("r1", "n1", "r", "n")
+res
+stats <- round(Combo.Results(res, p0, p1, N=100000), 6)[c(11, 9, 6,  7, 4, 5, 1, 2, 3)]
+c(res, stats)
