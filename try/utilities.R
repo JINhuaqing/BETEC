@@ -78,6 +78,7 @@ Combo.Results <- function(paras, p0, p1, alpha0=1, beta0=1, N=10000){
 
     typeI.err <- 1-rej.prob(r1, r, n1, n, p0)
     typeII.err <- rej.prob(r1, r, n1, n, p1)
+    typeII.err.delta  <- rej.prob(r1, r, n1, n, p1+0.05)
     ess0 <- ESS(r1, n1, n, p0)
     ess1 <- ESS(r1, n1, n, p1)
     pet0 <- PET(r1, n1, p0)
@@ -87,9 +88,9 @@ Combo.Results <- function(paras, p0, p1, alpha0=1, beta0=1, N=10000){
     PoP.H1R1 <- int.post.density.stage1(p1, 1, r1, n1, alpha0, beta0, N)
     PoP.H1R <- int.post.density(p1, 1, r1, r, n1, n, alpha0, beta0, N)
 
-    res <- c(typeI.err, typeII.err, ess0, ess1, pet0, pet1, PoP.H0r1, PoP.H1r, 
+    res <- c(typeI.err, typeII.err, typeII.err.delta, ess0, ess1, pet0, pet1, PoP.H0r1, PoP.H1r, 
              PoP.H1R1, PoP.H1R)
-    names(res) <- c("type1err", "type2err", "ESS0", "ESS1", 
+    names(res) <- c("type1err", "type2err", "type2err delta", "ESS0", "ESS1", 
                     "PET0", "PET1", "PoPH0r1", "PoPH1r", "PoPH1R1", "PoPH1R")
     res
 }

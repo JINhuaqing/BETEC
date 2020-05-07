@@ -1,4 +1,5 @@
 # R code to implement the STD and DTD design from (Tan_Machin_SIM_2002)
+source("utilities.R")
 
 # Posterior probability of right tail (Pr(>Ru|D))
 PoP.RT <- function(Ru, num, Rue, alp0, bet0){
@@ -158,27 +159,32 @@ DTD2BD <- function(n, N, Ru, Rl, lam1, lam2, alp0, bet0){
     res
 }
 
-pi.prior <- 0.1
-Ru <- 0.4
-Rl <- 0.2
-lam1 <- 0.7
-lam2 <- 0.8
+# p0   p1   lam2
+# 0.05 0.25 0.855
+# 0.10 0.30 0.835
+# 0.20 0.40 0.805
+# 0.30 0.50 0.78
+# 0.40 0.60 0.765
+# 0.50 0.70 0.76
+# 0.60 0.80 0.77
+pi.prior <- 0.9
+p0 <- 0.05
+p1 <- 0.25
+lam1 <- 0.6
+lam2 <- 0.855
 eps <- 0.05
 alp0 <- pi.prior + 1
 bet0 <- (1-pi.prior) + 1
 
-Rue <- Ru + eps
+Rue <- p1 + eps
 
-res.DTD <- DTD(Ru, Rl, lam1, lam2, alp0, bet0, eps)
+res.DTD <- DTD(p1, p0, lam1, lam2, alp0, bet0, eps)
 n <- res.DTD[1]
 N <- res.DTD[2]
-demores.DTD <- DTD2BD(n, N, Ru, Rl, lam1, lam2, alp0, bet0)
-demores.DTD
+res <- DTD2BD(n, N, p1, p0, lam1, lam2, alp0, bet0)
 
-res <- STD(Ru, lam1, lam2, alp0, bet0, eps)
-n <- res[1]
-N <- res[2]
-demores <- STD2BD(n, N, Ru, lam1, lam2, alp0, bet0) 
-demores
+stats <- round(Combo.Results(res, p0, p1, N=100000), 10)[c(11, 9, 6,  7, 4, 5, 1, 2, 3)]
+c(res, stats)
+
 
 

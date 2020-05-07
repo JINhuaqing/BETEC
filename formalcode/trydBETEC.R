@@ -12,11 +12,16 @@ source("utilities.R")
 # (p0, p1) = (0.1, 0.3), (b1, b2)=(0.05, 0.055)
 # (p0, p1) = (0.2, 0.4), (b1, b2)=(0.015, 0.07)
 # (p0, p1) = (0.6, 0.8), (b1, b2)=(0.015, 0.015)
+# b1 = (0.01, 0.025)
+# b2 = (0.05, 0.1)
+# (0.01, 0.05)
+# (0.025, 0.05)
+# (0.025, 0.10)
 option.list <- list(
-    make_option("--p0", type="double", default=0.6, help="p0"),
-    make_option("--p1", type="double", default=0.8, help="p1"),
-    make_option("--b1", type="double", default=0.015, help="b1"),
-    make_option("--b2", type="double", default=0.015, help="b2")
+    make_option("--p0", type="double", default=0.30, help="p0"),
+    make_option("--p1", type="double", default=0.5, help="p1"),
+    make_option("--b1", type="double", default=0.01, help="b1"),
+    make_option("--b2", type="double", default=0.05, help="b2")
                     )
 opt <- parse_args(OptionParser(option_list=option.list))
            

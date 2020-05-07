@@ -8,11 +8,11 @@ library(parallel)
 source("utilities.R")
 
 option.list <- list(
-    make_option("--p0", type="double", default=0.5, help="p0, default is 0.05"),
-    make_option("--p1", type="double", default=0.7, help="p1"),
-    make_option("--a1", type="double", default=0.01, help="a1"),
-    make_option("--a2", type="double", default=0.05, help="a2"),
-    make_option("--N", type="integer", default=10000, help="Num of sample used in MCMC, default is 10000"),
+    make_option("--p0", type="double", default=0.1, help="p0, default is 0.05"),
+    make_option("--p1", type="double", default=0.3, help="p1"),
+    make_option("--a1", type="double", default=0.02, help="a1"),
+    make_option("--a2", type="double", default=0.08, help="a2"),
+    make_option("--N", type="integer", default=100000, help="Num of sample used in MCMC, default is 10000"),
     make_option("--pi2", type="double", default=0.55, help="pi2")
                     )
 opt <- parse_args(OptionParser(option_list=option.list))
