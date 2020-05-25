@@ -27,8 +27,6 @@ The functions defined in utilities.R file of formalcode folder
 
 This repository also includes 
 
-- the CPP code for simon's design (Simon, 1989) with early stopping for efficacy. 
-
 - The R code for BET design (Shi and Yin, 2018).
 
 - The R code for STD and DTD design (Tan and Machin, 2002).
